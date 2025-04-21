@@ -6,6 +6,8 @@ namespace NSBraveNewWorld
     {
         public static void Main(string[] args)
         {
+            const ConsoleKey Escape = ConsoleKey.Escape;
+
             Console.CursorVisible = false;
 
             bool isPlaying = true;
@@ -42,7 +44,7 @@ namespace NSBraveNewWorld
                     }
                 }
 
-                if (key.Key == ConsoleKey.Escape)
+                if (key.Key == Escape)
                 {
                     isPlaying = false;
                 }
@@ -57,36 +59,39 @@ namespace NSBraveNewWorld
 
         private static void MovePlayer(ref int positionX, ref int positionY, int directionX, int directionY, char player, char empty)
         {
-            Console.SetCursorPosition(positionY, positionX);
-            Console.Write(empty);
+            DrawPlayer(positionY, positionX, empty);
 
             positionX += directionX;
             positionY += directionY;
 
-            Console.SetCursorPosition(positionY, positionX);
-            Console.Write(player);
+            DrawPlayer(positionY, positionX, player);
         }
 
         private static void GetDirection(ConsoleKeyInfo key, out int directionX, out int directionY)
         {
+            const ConsoleKey Up = ConsoleKey.UpArrow;
+            const ConsoleKey Down = ConsoleKey.DownArrow;
+            const ConsoleKey Right = ConsoleKey.RightArrow;
+            const ConsoleKey Left = ConsoleKey.LeftArrow;
+
             directionX = 0;
             directionY = 0;
 
             switch (key.Key)
             {
-                case ConsoleKey.UpArrow:
+                case Up:
                     directionX = -1;
                     break;
 
-                case ConsoleKey.DownArrow:
+                case Down:
                     directionX = 1;
                     break;
 
-                case ConsoleKey.LeftArrow:
+                case Left:
                     directionY = -1;
                     break;
 
-                case ConsoleKey.RightArrow:
+                case Right:
                     directionY = 1;
                     break;
             }
